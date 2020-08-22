@@ -1,15 +1,9 @@
-import axios from 'axios'
+import axios from './axiosInstance'
 const baseUrl = '/login'
 
-const login = async credentials => {
-    const config = {
-        validateStatus: function (status) {
-            return status >= 200 && status < 500;
-        },
-    }
-    const response = await axios.post(baseUrl, credentials, config)
-    console.log('Login response', response)
-    return response.data
+const login = async (credentials) => {
+    const response = await axios.post(baseUrl, credentials)
+    return response
 }
 
 export default { login }

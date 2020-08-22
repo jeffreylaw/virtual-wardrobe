@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
     },
     popover: {
         padding: '16px'
+    },
+    cardButton: {
+        marginLeft: '5px',
+        marginRight: '5px'
     }
 }))
 
@@ -86,13 +90,13 @@ const OutfitCard = ({ outfit, outfits, setOutfits, setShowNotification, setShowE
             </CardContent>
             <CardContent>
                 <Grid container justify="center">
-                    <Button startIcon={<Share />} variant="contained" color="primary" onClick={handleClick}>Share</Button>
+                    <Button className={classes.cardButton} startIcon={<Share />} variant="contained" color="primary" onClick={handleClick}>Share</Button>
                     {outfit.private ?
-                        <Button startIcon={<VisibilityOff />} variant="contained" color="primary" onClick={() => updateOutfit(outfit.id)}>Mark as private</Button> :
-                        <Button startIcon={<Visibility />} variant="contained" color="primary" onClick={() => updateOutfit(outfit.id)}>Mark as public</Button>}
+                        <Button className={classes.cardButton} startIcon={<VisibilityOff />} variant="contained" color="primary" onClick={() => updateOutfit(outfit.id)}>Mark as private</Button> :
+                        <Button className={classes.cardButton} startIcon={<Visibility />} variant="contained" color="primary" onClick={() => updateOutfit(outfit.id)}>Mark as public</Button>}
 
 
-                    <Button startIcon={<Delete />} variant="contained" color="secondary" onClick={() => deleteOutfit(outfit.id)}>Delete outfit</Button>
+                    <Button className={classes.cardButton} startIcon={<Delete />} variant="contained" color="secondary" onClick={() => deleteOutfit(outfit.id)}>Delete outfit</Button>
                 </Grid>
             </CardContent>
 

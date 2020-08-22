@@ -9,7 +9,7 @@ exports.Login = async function(request, response) {
     // Compare the hash and password 
     const passwordCorrect = user === null ? false : await bcrypt.compare(body.password, user.passwordHash)
     if (!(user && passwordCorrect)) {
-        return response.status(401).send({
+        return response.status(401).json({
             error: 'Invalid credentials'
         })
     }
@@ -22,5 +22,5 @@ exports.Login = async function(request, response) {
     // Digitally sign using a string from the SECRET variable as the secret
     const token = jwt.sign(userForToken, process.env.SECRET)
 
-    response.status(200).json({ token, username: user.username, name: user.name, roles: user.roles })
+    return response.status(200).json({ token, username: user.username, name: user.name, roles: user.roles })
 }

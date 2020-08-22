@@ -1,34 +1,32 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import tokenHelper from '../services/tokenHelper'
 import loginService from '../services/login'
+import { Grid } from '@material-ui/core';
 
 
 const Login = ({ setUser }) => {
-    const history = useHistory()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const onSubmit = async (event) => {
+    const onSubmit = (event) => {
         event.preventDefault()
-        try {
-            const user = await loginService.login({ username, password })
-            tokenHelper.setToken(user.token)
-            window.localStorage.setItem(
-                'loggedInUser', JSON.stringify(user)
-            )
-            setUser(user)
-            setUsername('')
-            setPassword('')
-            history.push('/')
-        } catch (exception) {
-            console.log('Error:', exception)
-        }
+            loginService.login({ username, password }).then(response => {
+                if (response.status === 200) {
+                    let user = response.data
+                    tokenHelper.setToken(user.token)
+                    window.localStorage.setItem(
+                        'loggedInUser', JSON.stringify(user)
+                    )
+                    setUser(user)
+                }
+            }).catch(exception => {
+                console.log(exception)
+            })
+        
     }
 
     return (
-        <div>
-            <h2>Login</h2>
+        <Grid container justify="center" alignItems="center" style={{ minHeight: '50vh' }}>
             <form onSubmit={onSubmit}>
                 <div>
                     Username:
@@ -38,9 +36,9 @@ const Login = ({ setUser }) => {
                     Password:
                 <input type="text" value={password} name="Password" onChange={({ target }) => setPassword(target.value)} />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit">login</button>
             </form>
-        </div>
+        </Grid>
     )
 }
 
