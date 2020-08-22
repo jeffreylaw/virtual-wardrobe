@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "description": "HTML is easy",
+      "category": "pants"
+    },
+    {
+      "id": 2,
+      "description": "Browser can execute only ",
+      "category": "shirt"
+    },
+    {
+      "id": 3,
+      "description": "White shoes",
+      "category": "shoes"
+    },
+    {
+      "description": "asdf",
+      "category": "adsf",
+      "id": 4
+    }
+  ]
+}

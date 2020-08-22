@@ -1,0 +1,23 @@
+.select-item-div {
+    padding-left: 36px;
+    padding-right: 36px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
+}
+
+.card {
+    flex: 0 0 auto;
+}
+
+.card {
+    margin: 10px;
+}
