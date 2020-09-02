@@ -1,16 +1,17 @@
 body {
-  background-color: #ffffff;
-  color: #1d3557;
+  background-color: #f7ebe8;
+  background-image: url("https://www.transparenttextures.com/patterns/light-paper-fibers.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 .nav {
-  background-color: #FFFFFF;
+  background-color: #444140;
   height: 5vh;
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgb(240, 240, 240);
-
 }
+
 
 .nav .logo {
   font-size: 22px;
@@ -18,7 +19,7 @@ body {
 
 .nav a {
   display: inline-block;
-  color: #333;
+  color: #fbfbfb;
   text-decoration: none;
   font-size: 16px;
   padding-left: 15px;
@@ -26,7 +27,8 @@ body {
 }
 
 .nav a:hover span {
-  border-bottom: 2px solid #DF612A;
+  padding-bottom: 6px;
+  border-bottom: 3px solid #DF612A;
 }
 
 .nav .icon {
@@ -46,23 +48,19 @@ body {
 
 @media screen and (max-width: 800px) {
   .nav.responsive {
-    /* position: relative; */
     flex-direction: column;
     height: auto;
   }
-
   .nav.responsive a.logo {
     font-size: 22px;
     align-self: flex-start;
   }
-
   .nav.responsive a.icon {
     position: absolute;
     right: 0;
     top: 0;
   }
   .nav.responsive a {
-    /* float: none; */
     display: inline-block;
     font-size: 16px;
     padding-top: 15px;

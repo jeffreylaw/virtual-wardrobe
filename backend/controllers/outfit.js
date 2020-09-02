@@ -5,19 +5,19 @@ const User = require('../models/user')
 
 
 exports.Outfit = async function (request, response) {
-    const token = tokenHelper.getTokenFrom(request)
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-    const outfit = await Outfit.findById(request.params.id)
-        .populate('headwear', { description: 1, imageID: 1 })
-        .populate('outerwear', { description: 1, imageID: 1 })
-        .populate('top', { description: 1, imageID: 1 })
-        .populate('bottom', { description: 1, imageID: 1 })
-        .populate('socks', { description: 1, imageID: 1 })
-        .populate('footwear', { description: 1, imageID: 1 })
 
+    const outfit = await Outfit.findById(request.params.id)
+        .populate('headwear', { brand: 1, description: 1, imageID: 1 })
+        .populate('outerwear', { brand: 1, description: 1, imageID: 1 })
+        .populate('top', { brand: 1,description: 1, imageID: 1 })
+        .populate('bottom', { brand: 1, description: 1, imageID: 1 })
+        .populate('socks', { brand: 1, description: 1, imageID: 1 })
+        .populate('footwear', { brand: 1, description: 1, imageID: 1 })
     if (!outfit.private) {
         return response.json(outfit)
     }
+    const token = tokenHelper.getTokenFrom(request)
+    const decodedToken = jwt.verify(token, process.env.SECRET)
     if ((!token || !decodedToken.id) && outfit.private) {
         return response.status(401).json({ error: 'You do not have permission to view this outfit' })
     }
@@ -34,12 +34,12 @@ exports.Outfits = async function (request, response) {
     const token = tokenHelper.getTokenFrom(request)
     const decodedToken = jwt.verify(token, process.env.SECRET)
     const outfits = await Outfit.find({ user: decodedToken.id })
-        .populate('headwear', { description: 1, imageID: 1 })
-        .populate('outerwear', { description: 1, imageID: 1 })
-        .populate('top', { description: 1, imageID: 1 })
-        .populate('bottom', { description: 1, imageID: 1 })
-        .populate('socks', { description: 1, imageID: 1 })
-        .populate('footwear', { description: 1, imageID: 1 })
+        .populate('headwear', { brand: 1, description: 1, imageID: 1 })
+        .populate('outerwear', { brand: 1, description: 1, imageID: 1 })
+        .populate('top', { brand: 1, description: 1, imageID: 1 })
+        .populate('bottom', { brand: 1, description: 1, imageID: 1 })
+        .populate('socks', { brand: 1, description: 1, imageID: 1 })
+        .populate('footwear', { brand: 1, description: 1, imageID: 1 })
 
     if (!token || !decodedToken.id) {
         return response.status(401).json({ error: 'Token missing or invalid' })
@@ -74,12 +74,12 @@ exports.CreateOutfit = async function (request, response) {
     user.outfits = user.outfits.concat(savedOutfit._id)
     await user.save()
     savedOutfit = await Outfit.findById(savedOutfit._id)
-        .populate('headwear', { description: 1, imageID: 1 })
-        .populate('outerwear', { description: 1, imageID: 1 })
-        .populate('top', { description: 1, imageID: 1 })
-        .populate('bottom', { description: 1, imageID: 1 })
-        .populate('socks', { description: 1, imageID: 1 })
-        .populate('footwear', { description: 1, imageID: 1 })
+        .populate('headwear', { brand: 1, description: 1, imageID: 1 })
+        .populate('outerwear', { brand: 1, description: 1, imageID: 1 })
+        .populate('top', { brand: 1, description: 1, imageID: 1 })
+        .populate('bottom', { brand: 1, description: 1, imageID: 1 })
+        .populate('socks', { brand: 1, description: 1, imageID: 1 })
+        .populate('footwear', { brand: 1, description: 1, imageID: 1 })
     response.json(savedOutfit)
 }
 
@@ -126,12 +126,12 @@ exports.UpdateOutfit = async function (request, response) {
     }
 
     const updatedOutfit = await Outfit.findByIdAndUpdate(request.params.id, outfit, { new: true, runValidators: true })
-        .populate('headwear', { description: 1, imageID: 1 })
-        .populate('outerwear', { description: 1, imageID: 1 })
-        .populate('top', { description: 1, imageID: 1 })
-        .populate('bottom', { description: 1, imageID: 1 })
-        .populate('socks', { description: 1, imageID: 1 })
-        .populate('footwear', { description: 1, imageID: 1 })
+        .populate('headwear', { brand: 1, description: 1, imageID: 1 })
+        .populate('outerwear', { brand: 1, description: 1, imageID: 1 })
+        .populate('top', { brand: 1, description: 1, imageID: 1 })
+        .populate('bottom', { brand: 1, description: 1, imageID: 1 })
+        .populate('socks', { brand: 1, description: 1, imageID: 1 })
+        .populate('footwear', { brand: 1,description: 1, imageID: 1 })
 
     if (updatedOutfit) {
         response.json(updatedOutfit)

@@ -4,8 +4,6 @@ const Item = require("../models/item")
 const User = require('../models/user')
 const config = require('../utils/config')
 
-// const cloudinary = require('../utils/cloudinary')
-
 exports.Item = async function(request, response) {
     const item = await Item.findById(request.params.id)
     if (item) {
@@ -81,6 +79,7 @@ exports.UpdateItem = async function(request, response) {
         return response.status(401).json({ error: 'Token missing or invalid' })
     }
     const item = {
+        brand: body.brand,
         description: body.description,
         category: body.category
     }

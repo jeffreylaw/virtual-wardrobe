@@ -11,7 +11,7 @@ const requestLogger = (request, response, next) => {
 
 // If the request is an unknown endpoint, respond with 404 and error message
 const unknownEndpoint = (request, response) => {
-    response.status(404).json({ error: 'Unknown endpoint' })
+    // response.status(404).json({ error: 'Unknown endpoint' })
 }
 
 // Handle errors

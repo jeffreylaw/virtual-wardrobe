@@ -8,7 +8,7 @@ const outfitSchema = new mongoose.Schema({
     },
     private: {
         type: Boolean,
-        default: false
+        default: true
     },
     headwear: {
         type: mongoose.SchemaTypes.ObjectId,

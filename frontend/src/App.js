@@ -70,7 +70,7 @@ const App = () => {
         {user && <Link to="/outfits"><span>Outfits</span></Link>}
         {!user && <Link to="/register"><span>Register</span></Link>}
         {user && <Link onClick={logout} to="/logout"><span>Logout ({user.username})</span></Link>}
-        <a href="#" className="icon" onClick={() => setResponsiveMenu(!responsiveMenu)}>
+        <a href="# " className="icon" onClick={() => setResponsiveMenu(!responsiveMenu)}>
           <i className="fa fa-bars"></i>
         </a>
       </div>

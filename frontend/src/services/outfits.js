@@ -1,6 +1,6 @@
 import axios from './axiosInstance'
 import tokenHelper from './tokenHelper'
-const baseUrl = 'http://localhost:3001/outfits'
+const baseUrl = '/outfits'
 
 const getAll = async () => {
     const config = {

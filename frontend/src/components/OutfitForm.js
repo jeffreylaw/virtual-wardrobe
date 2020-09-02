@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import outfitService from '../services/outfits'
 import SelectItem from './SelectItem/SelectItem'
 import { Grid, Typography, Button, Box } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 import { Image } from 'cloudinary-react'
 
 
@@ -22,26 +23,48 @@ const OutfitForm = ({ items, outfits, setOutfits }) => {
     const socksItems = items.filter(item => item.category === 'socks')
     const footwearItems = items.filter(item => item.category === 'footwear')
 
-    useEffect(() => {
-
-    })
 
     const createOutfit = async (event) => {
         event.preventDefault()
-        const outfitObject = { 
-            headwear: headwear.id || null, 
-            outerwear: outerwear.id || null, 
-            top: top.id, 
-            bottom: bottom.id, 
-            socks: socks.id || null, 
-            footwear: footwear.id || null
+        if (!top && !bottom) {
+            alert('stop')
+        } else {
+            const outfitObject = {
+                headwear: headwear.id || null,
+                outerwear: outerwear.id || null,
+                top: top.id,
+                bottom: bottom.id,
+                socks: socks.id || null,
+                footwear: footwear.id || null
+            }
+            console.log(outfitObject)
+            outfitService.create(outfitObject).then(returnedOutfit => {
+                console.log(returnedOutfit)
+                setOutfits(outfits.concat(returnedOutfit))
+                history.push('/outfits')
+            })
         }
-        console.log(outfitObject)
-        outfitService.create(outfitObject).then(returnedOutfit => {
-            console.log(returnedOutfit)
-            setOutfits(outfits.concat(returnedOutfit))
-            history.push('/outfits')
-        })
+    }
+
+    const generateRandomOutfit = () => {
+        if (headwearItems) {
+            setHeadwear(headwearItems[Math.floor(Math.random() * headwearItems.length)])
+        }
+        if (outerwearItems) {
+            setOuterwear(outerwearItems[Math.floor(Math.random() * outerwearItems.length)])
+        }
+        if (topItems) {
+            setTop(topItems[Math.floor(Math.random() * topItems.length)])
+        }
+        if (bottomItems) {
+            setBottom(bottomItems[Math.floor(Math.random() * bottomItems.length)])
+        }
+        if (socksItems) {
+            setSocks(socksItems[Math.floor(Math.random() * socksItems.length)])
+        }
+        if (footwearItems) {
+            setFootwear(footwearItems[Math.floor(Math.random() * footwearItems.length)])
+        }
     }
 
     return (
@@ -120,13 +143,19 @@ const OutfitForm = ({ items, outfits, setOutfits }) => {
                 }
             </Box>
             <form onSubmit={createOutfit}>
-                {top && bottom &&
                 <Grid container justify="center">
-                    <Button type="submit" variant="contained" color="primary" >
-                        Save outfit
+                    <Box mx={1} mt={1}>
+                        <Button type="submit" variant="contained" color="primary">
+                            <SaveIcon />Save outfit
                     </Button>
+                    </Box>
+                    <Box mx={1} mt={1}>
+                        <Button variant="contained" color="primary" onClick={generateRandomOutfit}>
+                            Generate random outfit
+                    </Button>
+                    </Box>
                 </Grid>
-                }
+
                 <SelectItem items={headwearItems} category='headwear' update={setHeadwear} />
                 <SelectItem items={outerwearItems} category='outerwear' update={setOuterwear} />
                 <SelectItem items={topItems} category='tops' update={setTop} />
