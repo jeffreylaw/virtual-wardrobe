@@ -5,13 +5,11 @@ import { makeStyles, Button, Box, TextField, Typography, Grid } from '@material-
 
 const useStyles = makeStyles({
     root: {
-        minHeight: '50vh',
-        color: '#1e1e24'
+        minHeight: '50vh'
     },
     form: {
-        border: '1px solid #cdcdcd',
-        padding: '40px',
-        background: '#fefcfb'
+        // border: '1px solid #cdcdcd',
+        padding: '40px'
     }
 })
 
@@ -42,12 +40,12 @@ const Login = ({ setUser }) => {
 
             <form onSubmit={onSubmit} className={classes.form}>
                 <Grid container direction="column" alignItems="center">
-                    <Typography variant="h6">Virtual Wardrobe</Typography>
+                    {/* <Typography variant="h6">Virtual Wardrobe</Typography> */}
                     <Box my={1}>
-                        <TextField variant="outlined" value={username} label="Username" onChange={({ target }) => setUsername(target.value)} />
+                        <TextField variant="standard" value={username} label="Username" onChange={({ target }) => setUsername(target.value)} />
                     </Box>
                     <Box my={1}>
-                        <TextField variant="outlined" type="password" value={password} label="Password" onChange={({ target }) => setPassword(target.value)} />
+                        <TextField variant="standard" type="password" value={password} label="Password" onChange={({ target }) => setPassword(target.value)} />
                     </Box>
                     <Box mt={2}>
                         <Button variant="contained" color="primary" type="submit">login</Button>

@@ -7,6 +7,7 @@ exports.Users = async function(request, response) {
 }
 
 exports.CreateUser = async function(request, response) {
+    console.log("create user")
     const body = request.body
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)
@@ -18,6 +19,6 @@ exports.CreateUser = async function(request, response) {
     })
 
     const savedUser = await user.save()
-
+    console.log(savedUser)
     response.json(savedUser)
 }

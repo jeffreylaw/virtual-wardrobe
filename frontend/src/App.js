@@ -64,6 +64,7 @@ const App = () => {
     <>
       <div className={responsiveMenu ? 'nav responsive' : 'nav'} ref={navRef}>
         <Link to="/" className="logo">Virtual Wardrobe</Link>
+        {!user && <Link to="/"><span>Login</span></Link>}
         {user && <Link to="/"><span>Home</span></Link>}
         {user && <Link to="/add-item"><span>Add Item</span></Link>}
         {user && <Link to="/create-outfit"><span>Create Outfit</span></Link>}

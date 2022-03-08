@@ -1,6 +1,6 @@
 import axios from './axiosInstance'
 import tokenHelper from './tokenHelper'
-const baseUrl = '/outfits'
+const baseUrl = '/api/outfits'
 
 const getAll = async () => {
     const config = {

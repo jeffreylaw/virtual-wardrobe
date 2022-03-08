@@ -1,9 +1,10 @@
 import axios from 'axios'
-const baseUrl = '/users'
+const baseUrl = '/api/users'
 
 const register = async credentials => {
+    console.log("Registering")
     const response = await axios.post(baseUrl, credentials)
-    console.log('Regist response', response)
+    console.log('Register response', response)
     return response.data
 }
 

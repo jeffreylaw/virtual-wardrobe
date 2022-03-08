@@ -6,7 +6,7 @@ import { makeStyles, Button, Box, TextField, Typography, Grid } from '@material-
 const useStyles = makeStyles({
     root: {
         minHeight: '50vh',
-        minWidth: '25vw',
+        // minWidth: '100vw',
         color: '#1e1e24'
     },
     form: {
@@ -15,7 +15,8 @@ const useStyles = makeStyles({
         paddingRight: '40px',
         paddingTop: '20px',
         paddingBottom: '20px',
-        background: '#fefcfb'
+        minWidth: '30vw'
+        // background: '#fefcfb'
     }
 })
 
@@ -43,15 +44,15 @@ const Register = () => {
         <Grid container justify="center" alignItems="center" className={classes.root}>
             <form onSubmit={onSubmit} className={classes.form}>
                 <Grid container direction="column" alignItems="center">
-                    <Typography variant="h6">Sign up</Typography>
+                    {/* <Typography variant="h6">Sign up</Typography> */}
                     <Box my={1}>
-                        <TextField variant="outlined" type="text" value={username} label="Username" onChange={({ target }) => setUsername(target.value)} />
+                        <TextField variant="standard" type="text" value={username} label="Username" onChange={({ target }) => setUsername(target.value)} />
                     </Box>
                     <Box my={1}>
-                        <TextField variant="outlined" type="text" value={name} label="Name" onChange={({ target }) => setName(target.value)} />
+                        <TextField variant="standard" type="text" value={name} label="Name" onChange={({ target }) => setName(target.value)} />
                     </Box>
                     <Box my={1}>
-                        <TextField variant="outlined" type="password" value={password} label="Password" onChange={({ target }) => setPassword(target.value)} />
+                        <TextField variant="standard" type="password" value={password} label="Password" onChange={({ target }) => setPassword(target.value)} />
                     </Box>
                     <Box mt={2}>
                         <Button variant="contained" color="primary" type="submit">Sign up</Button>

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
@@ -19,7 +20,6 @@ const mongoose = require('mongoose');
 
 // Connect to mongodb.
 // MongoDB Node.js driver rewrote some tools and put these behind flags so we need to turn these options on to avoid deprecation warnings.
-
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
     .then(result => {
         console.log('Connected to MongoDB')
@@ -45,10 +45,10 @@ app.use(middleware.requestLogger)
 
 // Enable routing
 require('./router')(app);
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// app.use(express.static(path.join(__dirname, 'build')));
+// app.get('/*', function (req, res) {
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 
 app.use(middleware.unknownEndpoint)
