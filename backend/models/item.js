@@ -11,7 +11,7 @@ const itemSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['headwear', 'outerwear', 'tops', 'bottoms', 'socks', 'footwear'],
+        enum: ['outerwear', 'tops', 'bottoms', 'footwear'],
         required: true
     },
     imageID: {

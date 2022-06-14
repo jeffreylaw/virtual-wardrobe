@@ -7,11 +7,9 @@ const User = require('../models/user')
 exports.Outfit = async function (request, response) {
 
     const outfit = await Outfit.findById(request.params.id)
-        .populate('headwear', { brand: 1, description: 1, imageID: 1 })
         .populate('outerwear', { brand: 1, description: 1, imageID: 1 })
         .populate('top', { brand: 1,description: 1, imageID: 1 })
         .populate('bottom', { brand: 1, description: 1, imageID: 1 })
-        .populate('socks', { brand: 1, description: 1, imageID: 1 })
         .populate('footwear', { brand: 1, description: 1, imageID: 1 })
     if (!outfit.private) {
         return response.json(outfit)
@@ -34,11 +32,9 @@ exports.Outfits = async function (request, response) {
     const token = tokenHelper.getTokenFrom(request)
     const decodedToken = jwt.verify(token, process.env.SECRET)
     const outfits = await Outfit.find({ user: decodedToken.id })
-        .populate('headwear', { brand: 1, description: 1, imageID: 1 })
         .populate('outerwear', { brand: 1, description: 1, imageID: 1 })
         .populate('top', { brand: 1, description: 1, imageID: 1 })
         .populate('bottom', { brand: 1, description: 1, imageID: 1 })
-        .populate('socks', { brand: 1, description: 1, imageID: 1 })
         .populate('footwear', { brand: 1, description: 1, imageID: 1 })
 
     if (!token || !decodedToken.id) {
@@ -62,11 +58,9 @@ exports.CreateOutfit = async function (request, response) {
     const outfit = new Outfit({
         user: user._id,
         private: body.private,
-        headwear: body.headwear || null,
         outerwear: body.outerwear || null,
         top: body.top,
         bottom: body.bottom,
-        socks: body.socks || null,
         footwear: body.footwear || null
     })
 
@@ -74,11 +68,9 @@ exports.CreateOutfit = async function (request, response) {
     user.outfits = user.outfits.concat(savedOutfit._id)
     await user.save()
     savedOutfit = await Outfit.findById(savedOutfit._id)
-        .populate('headwear', { brand: 1, description: 1, imageID: 1 })
         .populate('outerwear', { brand: 1, description: 1, imageID: 1 })
         .populate('top', { brand: 1, description: 1, imageID: 1 })
         .populate('bottom', { brand: 1, description: 1, imageID: 1 })
-        .populate('socks', { brand: 1, description: 1, imageID: 1 })
         .populate('footwear', { brand: 1, description: 1, imageID: 1 })
     response.json(savedOutfit)
 }
@@ -108,29 +100,23 @@ exports.UpdateOutfit = async function (request, response) {
     if (!token || !decodedToken.id) {
         return response.status(401).json({ error: 'Token missing or invalid' })
     }
-    const headwearID = body.headwear ? body.headwear.id : null
     const outerwearID = body.outerwear ? body.outerwear.id : null
     const topID = body.top ? body.top.id : null
     const bottomID = body.bottom ? body.bottom.id : null
-    const socksID = body.socks ? body.socks.id : null
     const footwearID = body.footwear ? body.footwear.id : null
 
     const outfit = {
         private: body.private,
-        headwear: headwearID,
         outerwear: outerwearID,
         top: topID,
         bottom: bottomID,
-        socks: socksID,
         footwear: footwearID
     }
 
     const updatedOutfit = await Outfit.findByIdAndUpdate(request.params.id, outfit, { new: true, runValidators: true })
-        .populate('headwear', { brand: 1, description: 1, imageID: 1 })
         .populate('outerwear', { brand: 1, description: 1, imageID: 1 })
         .populate('top', { brand: 1, description: 1, imageID: 1 })
         .populate('bottom', { brand: 1, description: 1, imageID: 1 })
-        .populate('socks', { brand: 1, description: 1, imageID: 1 })
         .populate('footwear', { brand: 1,description: 1, imageID: 1 })
 
     if (updatedOutfit) {

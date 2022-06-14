@@ -10,10 +10,6 @@ const outfitSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    headwear: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: 'Item'
-    },
     outerwear: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Item'
@@ -27,10 +23,6 @@ const outfitSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Item',
         required: true
-    },
-    socks: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: 'Item'
     },
     footwear: {
         type: mongoose.SchemaTypes.ObjectId,
